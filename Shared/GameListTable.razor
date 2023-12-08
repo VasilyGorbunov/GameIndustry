@@ -6,7 +6,7 @@
                 <th>Genre</th>
                 <th>Relese Date</th>
                 <th>
-                    <input type="checkbox" @onchange="(() => displayButtons = !displayButtons)"/>
+                    <input type="checkbox" @bind="displayButtons"/>
                 </th>
             </tr>
         </thead>
@@ -26,7 +26,8 @@
                     <IndividualGame 
                         Game="item" 
                         IsTable="true"
-                        DisplayButtons="displayButtons"/>
+                        DisplayButtons="displayButtons"
+                        DeleteGame="DeleteGame"/>
                 }
             }
 
@@ -36,7 +37,12 @@
 
 @code {
     [Parameter]
-    public List<Game> Games { get; set; }
+    public List<Game> Games { get; set; } = new List<Game>();
 
     private bool displayButtons = false;
+
+    public void DeleteGame(Game game)
+    {
+        Games.Remove(game);
+    }
 }
