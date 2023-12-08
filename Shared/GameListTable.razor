@@ -13,11 +13,11 @@
         <tbody>
             @if (Games == null)
             {
-                <tr>Loading Data...</tr>
+                @NullList
             }
             else if (Games.Count == 0)
             {
-                <tr>No Data...</tr>
+                @EmptyList
             }
             else
             {
@@ -38,6 +38,10 @@
 @code {
     [Parameter]
     public List<Game> Games { get; set; } = new List<Game>();
+    [Parameter]
+    public RenderFragment NullList { get; set; }
+    [Parameter]
+    public RenderFragment EmptyList { get; set; }
 
     private bool displayButtons = false;
 
