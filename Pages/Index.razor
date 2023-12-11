@@ -20,6 +20,12 @@
     DisplayButtons="true"
     SwitchGame="ShowNewGame"/>
 
+<div class="row">
+    <div class="col text-center">
+        <button class="btn btn-outline-primary" @onclick="AddNewGame">Add New Game</button>
+    </div>
+</div>
+
 @code {
     private List<Game> games = new List<Game>();
 
@@ -28,7 +34,7 @@
 
     protected async override Task OnInitializedAsync()
     {
-        await Task.Delay(2000);
+        // await Task.Delay(2000);
         games = new List<Game>()
         {
             new Game()
@@ -79,6 +85,16 @@
         }
 
         return tempGame;
+    }
+
+    private void AddNewGame()
+    {
+        games.Add(new Game()
+        {
+            Name = "Game for test",
+            Genre = "Test",
+            ReleaseDate = DateTime.Today
+        });
     }
 }
 

@@ -29,4 +29,25 @@
     {
         Games.Remove(game);
     }
+
+    protected override void OnInitialized()
+    {
+        Console.WriteLine($"1. OnInitialized. Games Count: {Games?.Count}");
+    }
+
+    protected override void OnParametersSet()
+    {
+        Console.WriteLine($"2. OnParametersSet. Games Count: {Games?.Count}");
+    }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        Console.WriteLine($"3. OnAfterRender. Games Count: {Games?.Count}, firstRender: {firstRender}");
+    }
+
+    protected override bool ShouldRender()
+    {
+        return true;
+    }
+
 }
