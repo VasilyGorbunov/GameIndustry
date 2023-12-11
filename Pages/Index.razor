@@ -12,21 +12,13 @@
     </div>
 </div>
 
-<GameListTable 
-    Games="games">
-    <NullList>
-        <tr><span style="text-align:center; color: red; font-weight:bolder">Element Loading...</span></tr>
-    </NullList>
-    <EmptyList>
-        <tr><span style="text-align:center; color: blue; font-weight:bolder">No Element.</span></tr>
-    </EmptyList>
-</GameListTable>
-
-@* <IndividualGame 
+<GameListTable Games="games" />
+    
+<IndividualGame 
     Game="oneGameToShow" 
     IsTable="false"
     DisplayButtons="true"
-    SwitchGame="ShowNewGame"/> *@
+    SwitchGame="ShowNewGame"/>
 
 @code {
     private List<Game> games = new List<Game>();
@@ -34,33 +26,34 @@
     private Random rnd;
     private Game oneGameToShow;
 
-    // protected override void OnInitialized()
-    // {
-    //     games = new List<Game>()
-    //     {
-    //         new Game()
-    //         {
-    //             Name = "Farming Simulator 2019",
-    //             Genre = "Simulator",
-    //             ReleaseDate = new DateTime(2018, 11, 19)
-    //         },
-    //         new Game()
-    //         {
-    //             Name = "The Witcher 3",
-    //             Genre = "Action/RPG",
-    //             ReleaseDate = new DateTime(2015, 5, 18)
-    //         },
-    //         new Game()
-    //         {
-    //             Name = "Destroy All Humans",
-    //             Genre = "Action/Adventure",
-    //             ReleaseDate = new DateTime(2020, 7, 28)
-    //         },
-    //     };
+    protected async override Task OnInitializedAsync()
+    {
+        await Task.Delay(2000);
+        games = new List<Game>()
+        {
+            new Game()
+            {
+                Name = "Farming Simulator 2019",
+                Genre = "Simulator",
+                ReleaseDate = new DateTime(2018, 11, 19)
+            },
+            new Game()
+            {
+                Name = "The Witcher 3",
+                Genre = "Action/RPG",
+                ReleaseDate = new DateTime(2015, 5, 18)
+            },
+            new Game()
+            {
+                Name = "Destroy All Humans",
+                Genre = "Action/Adventure",
+                ReleaseDate = new DateTime(2020, 7, 28)
+            },
+        };
 
-    //     rnd = new Random(DateTime.Now.Microsecond);
-    //     oneGameToShow = games[rnd.Next(0, games.Count)];
-    // }
+        rnd = new Random(DateTime.Now.Microsecond);
+        oneGameToShow = games[rnd.Next(0, games.Count)];
+    }
 
     private void ShowNewGame()
     {
