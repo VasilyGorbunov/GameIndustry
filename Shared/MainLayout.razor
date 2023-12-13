@@ -13,7 +13,24 @@
         </div>
 
         <article class="content px-4">
-            @Body
+            @* <CascadingValue Value="Color" Name="Color">
+                <CascadingValue Value="Size" Name="Size"> *@
+                    <CascadingValue Value="_appStyle">
+                        @Body
+                    </CascadingValue>
+                    
+               @*  </CascadingValue>        
+            </CascadingValue> *@
+            
         </article>
     </main>
 </div>
+
+@code {
+    //string Color = "blue";
+    //string Size = "65px";
+
+    AppStyle _appStyle = new AppStyle();
+
+    
+}

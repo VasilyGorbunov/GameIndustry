@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using GameIndustry.Models;
+using Microsoft.AspNetCore.Components;
+using static GameIndustry.Shared.MainLayout;
 
 namespace GameIndustry.Pages
 {
@@ -6,6 +8,14 @@ namespace GameIndustry.Pages
     {
         [Inject] SingletonService singleton { get; set; }
         [Inject] TransientService transient { get; set; }
+
+        //[CascadingParameter(Name = "Color")]
+        //public string Color { get; set; }
+        //[CascadingParameter(Name = "Size")]
+        //public string Size { get; set; }
+
+        [CascadingParameter]
+        public AppStyle Styles { get; set; }
 
         private int currentCount = 0;
 
