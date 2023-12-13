@@ -1,4 +1,5 @@
 using GameIndustry;
+using GameIndustry.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +9,7 @@ builder.Services.AddServerSideBlazor();
 
 builder.Services.AddTransient<TransientService>();
 builder.Services.AddSingleton<SingletonService>();
+builder.Services.AddTransient<IRepository, MockGamesRepository>();
 
 var app = builder.Build();
 
