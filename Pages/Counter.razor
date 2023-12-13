@@ -1,6 +1,5 @@
 ﻿@page "/counter"
-@inject SingletonService singleton
-@inject TransientService transient
+
 
 <PageTitle>Counter!!!</PageTitle>
 
@@ -33,16 +32,3 @@
         Transient count: @transient.Value
     </div>
 </div>
-
-
-@code {
-    private int currentCount = 0;
-
-    private void IncrementCount()
-    {
-        currentCount++;
-
-        singleton.Value = currentCount;
-        transient.Value = currentCount;
-    }
-}
