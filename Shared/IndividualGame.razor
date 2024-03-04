@@ -1,0 +1,48 @@
+﻿@if (!IsTable)
+{
+    <div class="row text-center alert alert-info">
+        <div class="col">
+            <p>@Game.Name</p>
+            <p>@Game.Genre</p>
+            <p>@Game.ReleaseDate.ToString("dd.MM.yyyy")</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <button class="btn btn-danger" @onclick="Delete">Delete</button>
+        </div>
+        <div class="col">
+            @if (_message is not null)
+            {
+                <span class="text-danger">@_message</span>
+                _message = null;
+            }
+        </div>
+    </div>
+}
+else
+{
+    <tr>
+        <td>@Game.Name</td>
+        <td>@Game.Genre</td>
+        <td>@Game.ReleaseDate.ToString("dd.MM.yyyy")</td>
+        <td>
+            <button class="btn btn-danger" @onclick="Delete">Delete</button>
+        </td>
+    </tr>
+}
+
+@code {
+    [Parameter]
+    public Game Game { get; set; }
+    [Parameter]
+    public bool IsTable { get; set; }
+
+    private string? _message;
+
+    private void Delete()
+    {
+        _message = $"Game {Game.Name} deleted!";
+    }
+}
