@@ -8,18 +8,21 @@
         </div>
     </div>
 
-    <div class="row">
-        <div class="col">
-            <button class="btn btn-danger" @onclick="Delete">Delete</button>
+    @if (IsDisplayButtons)
+    {
+        <div class="row">
+            <div class="col offset-3">
+                <button class="btn btn-danger" @onclick="Delete">Delete</button>
+            </div>
+            <div class="col">
+                @if (_message is not null)
+                {
+                    <span class="text-danger">@_message</span>
+                    _message = null;
+                }
+            </div>
         </div>
-        <div class="col">
-            @if (_message is not null)
-            {
-                <span class="text-danger">@_message</span>
-                _message = null;
-            }
-        </div>
-    </div>
+    }
 }
 else
 {
@@ -28,7 +31,15 @@ else
         <td>@Game.Genre</td>
         <td>@Game.ReleaseDate.ToString("dd.MM.yyyy")</td>
         <td>
-            <button class="btn btn-danger" @onclick="Delete">Delete</button>
+            @if (IsDisplayButtons)
+            {
+                <button class="btn btn-danger" @onclick="Delete">Delete</button>
+                @if (_message is not null)
+                {
+                    <span class="text-danger ps-3">@_message</span>
+                    _message = null;
+                }
+            }
         </td>
     </tr>
 }
@@ -38,6 +49,9 @@ else
     public Game Game { get; set; }
     [Parameter]
     public bool IsTable { get; set; }
+
+    [Parameter]
+    public bool IsDisplayButtons { get; set; } = false;
 
     private string? _message;
 
