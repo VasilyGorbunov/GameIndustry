@@ -13,11 +13,27 @@
         <tbody>
         @if (Games is null)
         {
-            <tr>LOADING DATA...</tr>
+            @if (NullList is not null)
+            {
+                @NullList
+            }
+            else
+            {
+                    <img src="/images/ice.gif" height="200" />
+            }
+            
         }
         else if (Games.Count == 0)
         {
-            <tr>NO ITEMS IN ARRAY</tr>
+            @if (EmptyList is not null)
+            {
+                @EmptyList
+            }
+            else
+            {
+                <img src="/images/nodata.jpg" height="200" />
+            }
+            
         }
         else
         {
@@ -34,6 +50,10 @@
 @code {
     [Parameter]
     public List<Game> Games { get; set; }
+    [Parameter]
+    public RenderFragment NullList { get; set; }
+    [Parameter]
+    public RenderFragment EmptyList { get; set; }
 
     private bool _displayButtons = false;
 
