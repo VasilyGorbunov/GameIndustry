@@ -17,17 +17,29 @@
 
 <GameListTable Games="games"/>
 
-<IndividualGame Game="games[0]" IsTable="false" IsDisplayButtons="true"/>
+<IndividualGame 
+    Game="_oneGameToShow" 
+    IsTable="false" 
+    IsDisplayButtons="true"
+    SwitchGame="ShowNewGame"/>
 
 @code
 {
     private List<Game> games;
+    private Random _rnd;
+    private Game _oneGameToShow;
 
     protected override void OnInitialized()
     {
         
         games = new List<Game>()
         {
+            new Game()
+            {
+                Name = "Русская рыбалка 4",
+                Genre = "Simulator",
+                ReleaseDate = new DateTime(2020, 03, 05)
+            },
             new Game()
             {
                 Name = "Farming Simulator 2019",
@@ -47,5 +59,34 @@
                 ReleaseDate = new DateTime(2020, 07, 28)
             }
         };
+
+        _rnd = new Random(DateTime.Now.Millisecond);
+        _oneGameToShow = games[_rnd.Next(0, games.Count)];
+    }
+
+    private void ShowNewGame()
+    {
+        _oneGameToShow = SwitchGame();
+    }
+
+    private Game SwitchGame()
+    {
+        Game tempGame;
+
+        if (games.Count >= 2)
+        {
+            int iterator = _rnd.Next(0, games.Count);
+            tempGame = games[iterator];
+        }
+        else if (games.Count == 1)
+        {
+            tempGame = games[0];
+        }
+        else
+        {
+            return new Game(){Name = "No items in array", ReleaseDate = DateTime.Now};
+        }
+
+        return tempGame;
     }
 }

@@ -6,7 +6,7 @@
                 <th>Genre</th>
                 <th>Release Date</th>
                 <th>
-                    <input type="checkbox" @onchange="(() => _displayButtons = !_displayButtons)"/>
+                    <input type="checkbox" @bind="_displayButtons"/>
                 </th>
             </tr>
         </thead>
@@ -23,7 +23,7 @@
         {
             @foreach (var item in Games)
             {
-                <IndividualGame Game="item" IsTable="true" IsDisplayButtons="_displayButtons"/>
+                <IndividualGame Game="item" IsTable="true" IsDisplayButtons="_displayButtons" DeleteGame="DeleteTheGame"/>
             } 
         }
         
@@ -36,4 +36,9 @@
     public List<Game> Games { get; set; }
 
     private bool _displayButtons = false;
+
+    private void DeleteTheGame(Game game)
+    {
+        Games.Remove(game);
+    }
 }
