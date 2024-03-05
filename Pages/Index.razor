@@ -15,20 +15,13 @@
     </div>
 </div>
 
-<GameListTable Games="games">
-    @* <NullList>
-        <tr><span style="text-align: center; color: orangered; font-weight: bolder">Element Loading...</span></tr>
-    </NullList> *@
-    @* <EmptyList>
-        <tr><span style="text-align: center; color: slateblue; font-weight: bolder">No elements in array.</span></tr>
-    </EmptyList> *@
-</GameListTable>
+<GameListTable Games="games"/>
 
-@* <IndividualGame 
+<IndividualGame 
     Game="_oneGameToShow" 
     IsTable="false" 
     IsDisplayButtons="true"
-    SwitchGame="ShowNewGame"/> *@
+    SwitchGame="ShowNewGame"/>
 
 @code
 {
@@ -36,40 +29,41 @@
     private Random _rnd;
     private Game _oneGameToShow;
 
-    // protected override void OnInitialized()
-    // {
-        
-    //     games = new List<Game>()
-    //     {
-    //         new Game()
-    //         {
-    //             Name = "Русская рыбалка 4",
-    //             Genre = "Simulator",
-    //             ReleaseDate = new DateTime(2020, 03, 05)
-    //         },
-    //         new Game()
-    //         {
-    //             Name = "Farming Simulator 2019",
-    //             Genre = "Simulator",
-    //             ReleaseDate = new DateTime(2018, 11, 19)
-    //         },
-    //         new Game()
-    //         {
-    //             Name = "The Witcher 3",
-    //             Genre = "Action/RPG",
-    //             ReleaseDate = new DateTime(2015, 05, 18)
-    //         },
-    //         new Game()
-    //         {
-    //             Name = "Destroy All Humans!",
-    //             Genre = "Action-Adventure",
-    //             ReleaseDate = new DateTime(2020, 07, 28)
-    //         }
-    //     };
+    protected override async Task OnInitializedAsync()
+    {
+        await Task.Delay(3000);
 
-    //     _rnd = new Random(DateTime.Now.Millisecond);
-    //     _oneGameToShow = games[_rnd.Next(0, games.Count)];
-    // }
+        games = new List<Game>()
+        {
+            new Game()
+            {
+                Name = "Русская рыбалка 4",
+                Genre = "Simulator",
+                ReleaseDate = new DateTime(2020, 03, 05)
+            },
+            new Game()
+            {
+                Name = "Farming Simulator 2019",
+                Genre = "Simulator",
+                ReleaseDate = new DateTime(2018, 11, 19)
+            },
+            new Game()
+            {
+                Name = "The Witcher 3",
+                Genre = "Action/RPG",
+                ReleaseDate = new DateTime(2015, 05, 18)
+            },
+            new Game()
+            {
+                Name = "Destroy All Humans!",
+                Genre = "Action-Adventure",
+                ReleaseDate = new DateTime(2020, 07, 28)
+            }
+        };
+
+        _rnd = new Random(DateTime.Now.Millisecond);
+        _oneGameToShow = games[_rnd.Next(0, games.Count)];
+    }
 
     private void ShowNewGame()
     {

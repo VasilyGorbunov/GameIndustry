@@ -11,38 +11,15 @@
             </tr>
         </thead>
         <tbody>
-        @if (Games is null)
-        {
-            @if (NullList is not null)
-            {
-                @NullList
-            }
-            else
-            {
-                    <img src="/images/ice.gif" height="200" />
-            }
-            
-        }
-        else if (Games.Count == 0)
-        {
-            @if (EmptyList is not null)
-            {
-                @EmptyList
-            }
-            else
-            {
-                <img src="/images/nodata.jpg" height="200" />
-            }
-            
-        }
-        else
-        {
-            @foreach (var item in Games)
-            {
-                <IndividualGame Game="item" IsTable="true" IsDisplayButtons="_displayButtons" DeleteGame="DeleteTheGame"/>
-            } 
-        }
-        
+        <GenericList ListOfItems="Games">
+            <ItemTemplate Context="game">
+                <IndividualGame 
+                    Game="game"
+                    IsTable="true"
+                    IsDisplayButtons="_displayButtons"
+                    DeleteGame="DeleteTheGame"/>
+            </ItemTemplate>
+        </GenericList>
         </tbody>
     </table>
 </div>
@@ -50,10 +27,6 @@
 @code {
     [Parameter]
     public List<Game> Games { get; set; }
-    [Parameter]
-    public RenderFragment NullList { get; set; }
-    [Parameter]
-    public RenderFragment EmptyList { get; set; }
 
     private bool _displayButtons = false;
 
