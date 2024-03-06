@@ -1,8 +1,16 @@
+using GameIndustry.Repository;
+using GameIndustry.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
+
+builder.Services.AddSingleton<SingletonService>();
+builder.Services.AddTransient<TransientService>();
+
+builder.Services.AddTransient<IRepository, MockGamesRepository>();
 
 var app = builder.Build();
 

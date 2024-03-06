@@ -1,5 +1,7 @@
 ﻿@page "/"
+@using GameIndustry.Repository
 
+@inject IRepository repository
 
 <PageTitle>Index</PageTitle>
 
@@ -23,6 +25,12 @@
     IsDisplayButtons="true"
     SwitchGame="ShowNewGame"/>
 
+<div class="row">
+    <div class="col text-center">
+        <button @onclick="AddNewGame" class="btn btn-success">Add New Game</button>
+    </div>
+</div>
+
 @code
 {
     private List<Game> games;
@@ -31,35 +39,9 @@
 
     protected override async Task OnInitializedAsync()
     {
-        await Task.Delay(3000);
+        // await Task.Delay(3000);
 
-        games = new List<Game>()
-        {
-            new Game()
-            {
-                Name = "Русская рыбалка 4",
-                Genre = "Simulator",
-                ReleaseDate = new DateTime(2020, 03, 05)
-            },
-            new Game()
-            {
-                Name = "Farming Simulator 2019",
-                Genre = "Simulator",
-                ReleaseDate = new DateTime(2018, 11, 19)
-            },
-            new Game()
-            {
-                Name = "The Witcher 3",
-                Genre = "Action/RPG",
-                ReleaseDate = new DateTime(2015, 05, 18)
-            },
-            new Game()
-            {
-                Name = "Destroy All Humans!",
-                Genre = "Action-Adventure",
-                ReleaseDate = new DateTime(2020, 07, 28)
-            }
-        };
+        games = repository.GetAllGames();
 
         _rnd = new Random(DateTime.Now.Millisecond);
         _oneGameToShow = games[_rnd.Next(0, games.Count)];
@@ -89,5 +71,10 @@
         }
 
         return tempGame;
+    }
+
+    private void AddNewGame()
+    {
+        games.Add(new Game(){ Name = "Gme for test", Genre = "Test", ReleaseDate = DateTime.Now});
     }
 }
