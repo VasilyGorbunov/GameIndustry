@@ -1,14 +1,14 @@
 ﻿<div class="table-responsive">
     <table class="table table-striped">
         <thead class="thead-light">
-            <tr>
-                <th>Name</th>
-                <th>Genre</th>
-                <th>Release Date</th>
-                <th>
-                    <input type="checkbox" @bind="_displayButtons"/>
-                </th>
-            </tr>
+        <tr>
+            <th>Name</th>
+            <th>Genre</th>
+            <th>Release Date</th>
+            <th>
+                <input type="checkbox" @bind="_displayButtons"/>
+            </th>
+        </tr>
         </thead>
         <tbody>
         <GenericList ListOfItems="Games">
@@ -24,15 +24,39 @@
     </table>
 </div>
 
+<Confirmation
+    @ref="_confirmation"
+    OnCancel="OnCancel"
+    OnConfirm="OnConfirm"
+    >
+    <div class="text-danger">Go you wish to deleted @_gameToBeDeleted?.Name ?</div>
+</Confirmation>
+
 @code {
     [Parameter]
     public List<Game> Games { get; set; }
 
     private bool _displayButtons = false;
+    private Confirmation _confirmation;
+    private Game? _gameToBeDeleted;
 
     private void DeleteTheGame(Game game)
     {
-        Games.Remove(game);
+        _gameToBeDeleted = game;
+        _confirmation.Show();
+    }
+
+    private void OnConfirm()
+    {
+        Games.Remove(_gameToBeDeleted!);
+        _confirmation.Hide();
+        _gameToBeDeleted = null;
+    }
+
+    private void OnCancel()
+    {
+       _confirmation.Hide();
+        _gameToBeDeleted = null;
     }
 
     /* ------------------------------------------------ */
