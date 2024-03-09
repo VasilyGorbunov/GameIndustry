@@ -45,5 +45,5 @@ else
     [Parameter] public EventCallback<Game> DeleteGame { get; set; }
     [Parameter] public EventCallback SwitchGame { get; set; }
 
-
+    [CascadingParameter] public AppStyle AppStyle { get; set; }
 }

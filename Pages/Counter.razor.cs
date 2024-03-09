@@ -1,4 +1,5 @@
-﻿using GameIndustry.Services;
+﻿using GameIndustry.Models;
+using GameIndustry.Services;
 using Microsoft.AspNetCore.Components;
 
 namespace GameIndustry.Pages
@@ -7,6 +8,9 @@ namespace GameIndustry.Pages
     {
         [Inject] public SingletonService singleton { get; set; }
         [Inject] public TransientService transient { get; set; }
+
+        [CascadingParameter] public AppStyle Styles { get; set; }
+        
 
         private int currentCount = 0;
 

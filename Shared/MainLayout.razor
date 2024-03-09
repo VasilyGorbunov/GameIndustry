@@ -17,9 +17,17 @@
         </div>
 
         <article class="content px-4">
-            @Body
-            <Counter/>
+                <CascadingValue Value="_appStyle">
+                    @Body
+                </CascadingValue>
+            @* <Counter/> *@
             @* <span style="color:firebrick;">Hello from Layout (body bottom content)</span> *@
         </article>
     </main>
 </div>
+
+@code {
+
+    readonly AppStyle _appStyle = new();
+
+}
