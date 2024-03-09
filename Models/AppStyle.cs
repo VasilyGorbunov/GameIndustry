@@ -11,5 +11,12 @@
             new string("Ты чудесно пахнешь на этих похоронах."),
             new string("Хочешь меня на хер послать? Милости просим.")
         };
+
+        public List<TableListModel> TableStyle { get; set; } = new List<TableListModel>()
+        {
+            new TableListModel() { Text = "Table Dark", Value = "table-dark" },
+            new TableListModel() { Text = "Table Striped", Value = "table-striped" },
+            new TableListModel() { Text = "Table Bordered", Value = "table-bordered" },
+        };
     }
 }
